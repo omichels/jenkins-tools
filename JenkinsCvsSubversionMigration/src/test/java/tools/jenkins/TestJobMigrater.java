@@ -1,11 +1,15 @@
 package tools.jenkins;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.List;
 
 import org.jdom2.Document;
 import org.jdom2.Element;
+import org.jdom2.filter.ElementFilter;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 import org.junit.Test;
@@ -65,11 +69,12 @@ public class TestJobMigrater {
 		outputter.output(doc, baos);
 		
 		
-		System.out.println(outputter.outputString(doc));
-		
 		ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
 		
-		migrater.migrateJob(bais);
+		Document migratedDocument = migrater.migrateJob(bais);
+				 
+		assertEquals("svn://server/projects/cvsModuleName/branches/TRY_2015_01/componentName/subComponentName/full/path", 
+				migratedDocument.getDescendants(new ElementFilter("remote")).next().getText()  );
 
 		
 

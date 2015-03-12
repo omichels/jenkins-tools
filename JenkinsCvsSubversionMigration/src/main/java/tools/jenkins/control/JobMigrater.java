@@ -93,7 +93,6 @@ public class JobMigrater {
         		}
         	}
         }
-        System.out.println(outputter.outputString(document));
 			
 		return document;
 	}
