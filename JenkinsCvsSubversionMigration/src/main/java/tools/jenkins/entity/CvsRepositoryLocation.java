@@ -2,14 +2,22 @@ package tools.jenkins.entity;
 
 public enum CvsRepositoryLocation {
 
-	TAG, BRANCH, HEAD;
+	TAG{
+		@Override
+		public String toString(){
+			return "tag";
+		}
+	}, 
+	BRANCH{
+		@Override
+		public String toString(){
+			return "branch";
+		}
+	}, HEAD{
+		@Override
+		public String toString(){
+			return "head";
+		}
+	};
 	
-	
-	
-	
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return super.toString();
-	}
 }

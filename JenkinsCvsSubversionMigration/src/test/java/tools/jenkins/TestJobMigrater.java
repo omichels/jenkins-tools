@@ -11,19 +11,19 @@ import org.jdom2.Element;
 import org.jdom2.filter.ElementFilter;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
+import org.junit.Before;
 import org.junit.Test;
 
 import tools.jenkins.control.FixedPatternSubversionPathGenerator;
 import tools.jenkins.control.JobMigrater;
 
 public class TestJobMigrater {
-
-	@Test
-	public void testMigrateJob() throws IOException {
-		JobMigrater migrater = new JobMigrater(new FixedPatternSubversionPathGenerator());
-		
-		 
-		Document doc = new Document();
+	
+	private Document doc;
+	
+	@Before
+	public void setup(){
+		doc = new Document();
 		Element rootElement = new Element("project");
 		doc.addContent(rootElement);
 		Element description = new Element("description");
@@ -62,11 +62,18 @@ public class TestJobMigrater {
 		Element locationName = new Element("locationName");
 		location.addContent(locationName);
 		locationName.setText("TRY_2015_01");
+
+	}
+
+	@Test
+	public void testMigrateJob() throws IOException {
+		
+		// will use the pattern: "svn://server/projects/${projectName}/${branchesTagsTrunkFolders}"
+		JobMigrater migrater = new JobMigrater(new FixedPatternSubversionPathGenerator());
 		
 		XMLOutputter outputter = new XMLOutputter(Format.getPrettyFormat());
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		outputter.output(doc, baos);
-		
 		
 		ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
 		

@@ -11,8 +11,6 @@ import org.jdom2.JDOMException;
 import org.jdom2.filter.ElementFilter;
 import org.jdom2.filter.Filter;
 import org.jdom2.input.SAXBuilder;
-import org.jdom2.output.Format;
-import org.jdom2.output.XMLOutputter;
 
 import tools.jenkins.entity.CvsRepository;
 import tools.jenkins.entity.CvsRepositoryItem;
@@ -29,6 +27,10 @@ public class JobMigrater {
 		this.svnPathGenerator = new SubversionPathGenerator();
 	}
 
+	/** 
+	 * for testing purposes
+	 * @param pSvnPathGenerator
+	 */
 	public JobMigrater(SubversionPathGenerator pSvnPathGenerator) {
 		this.svnPathGenerator = pSvnPathGenerator;
 	}
@@ -66,7 +68,6 @@ public class JobMigrater {
 				
         }
         
-        XMLOutputter outputter = new XMLOutputter(Format.getPrettyFormat());
         if (scm.getAttribute("class").getValue().endsWith("NullSCM")) {
         	// do nothing
         } else {
