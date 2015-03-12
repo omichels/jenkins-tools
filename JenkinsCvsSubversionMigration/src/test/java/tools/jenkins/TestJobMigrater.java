@@ -5,7 +5,6 @@ import static org.junit.Assert.assertEquals;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.List;
 
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -75,8 +74,6 @@ public class TestJobMigrater {
 				 
 		assertEquals("svn://server/projects/cvsModuleName/branches/TRY_2015_01/componentName/subComponentName/full/path", 
 				migratedDocument.getDescendants(new ElementFilter("remote")).next().getText()  );
-
-		
 
 	}
 
