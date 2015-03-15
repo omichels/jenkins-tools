@@ -1,6 +1,8 @@
 package tools.jenkins.entity;
 
 import org.jdom2.Document;
+import org.jdom2.output.Format;
+import org.jdom2.output.XMLOutputter;
 
 public class JenkinsJob {
 	
@@ -9,6 +11,7 @@ public class JenkinsJob {
 
 	
 	public JenkinsJob (String pUrl) {
+		this.url = pUrl;
 	}
 
 
@@ -24,6 +27,12 @@ public class JenkinsJob {
 
 	public void setDocument(Document document) {
 		this.document = document;
+	}
+
+	@Override
+	public String toString() {
+		XMLOutputter outputter = new XMLOutputter(Format.getPrettyFormat());
+		return "JenkinsJob [url=" + url + ", document=" + outputter.outputString(document);
 	}
 	
 	
