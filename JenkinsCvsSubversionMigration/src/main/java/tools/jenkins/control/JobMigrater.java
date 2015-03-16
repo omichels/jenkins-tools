@@ -41,10 +41,8 @@ public class JobMigrater {
 		Document document;
 		try {
 			document = saxBuilder.build(is);
-		} catch (JDOMException e) {
+		} catch (JDOMException | IOException e) {
 			throw new RuntimeException(e);
-		} catch (IOException ioEx) {
-			throw new RuntimeException(ioEx);
 		}
 
 		Element rootElement = document.getRootElement();
@@ -83,7 +81,7 @@ public class JobMigrater {
         			Element localElement = new Element("local");
         			Element depthOption = new Element("depthOption"); depthOption.setText("infinity");
         			Element ignoreExternalsOption = new Element("ignoreExternalsOption"); ignoreExternalsOption.setText("false");
-        			String snvBasePath = MigrationProperties.getInstance().getTranslatedValue(element.getCvsRoot());
+        			String snvBasePath = MigrationProperties.getInstance().getValue(element.getCvsRoot());
         			remoteElement.setText(svnPathGenerator.transformPath(snvBasePath, cvsRepositoryItem));
         			localElement.setText(cvsRepositoryItem.getLocalName());
         			scmModuleLocation.addContent(remoteElement);

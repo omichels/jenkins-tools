@@ -2,12 +2,7 @@ package tools.jenkins.control;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
-import java.text.MessageFormat;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Properties;
-
-import org.apache.commons.lang3.text.StrSubstitutor;
 
 public class MigrationProperties {
 
@@ -31,19 +26,21 @@ public class MigrationProperties {
 	}
 	
 	
-	public String getTranslatedValue(String pKey) {
+	public String getValue(String pKey) {
 		if (properties.containsKey(pKey))  {
 			return properties.getProperty(pKey);
-		} else
+		} else {
 			throw new RuntimeException("no such key :" + pKey);
+		}
 	}
 	
 	
 	public String getValueOrEmptyString(String pKey) {
 		if (properties.containsKey(pKey))  {
 			return properties.getProperty(pKey);
-		} else
+		} else {
 			return "";
+		}
 	}
 	
 
